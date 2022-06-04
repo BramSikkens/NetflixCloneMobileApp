@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import "../Tabs/HomeTab.dart";
-import "../Tabs/SettingsTab.dart";
+import 'UpcomingTab.dart';
 
 class TabController extends StatefulWidget {
   const TabController({Key? key}) : super(key: key);
@@ -18,7 +18,7 @@ class TabController extends StatefulWidget {
 class TabControllerState extends State<TabController> {
   List<Widget> _tabs = [
     HomeTab(), // see the HomeTab class below
-    SettingTab() // see the SettingsTab class below
+    UpcomingTab() // see the SettingsTab class below
   ];
 
   @override
@@ -29,7 +29,7 @@ class TabControllerState extends State<TabController> {
           items: [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.settings), label: 'Settings')
+                icon: Icon(Icons.movie_creation), label: 'Upcoming')
           ],
         ),
         tabBuilder: (BuildContext context, index) {
