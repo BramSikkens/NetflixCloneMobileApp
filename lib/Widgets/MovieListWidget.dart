@@ -1,8 +1,9 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import "package:http/http.dart" as http;
+
+import "../Models/Movie.dart";
 
 class MovieListWidget extends StatefulWidget {
   final String title;
@@ -77,18 +78,6 @@ class MovieListState extends State<MovieListWidget> {
                 }))
       ],
     );
-  }
-}
-
-class Movie {
-  final String name;
-  final String backdropPath;
-
-  const Movie({required this.name, required this.backdropPath});
-  factory Movie.fromJson(Map<String, dynamic> json) {
-    return Movie(
-        backdropPath: (json["backdrop_path"] ?? ""),
-        name: json["original_name"] ?? json["original_title"]);
   }
 }
 
