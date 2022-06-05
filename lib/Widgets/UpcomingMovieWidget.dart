@@ -1,16 +1,15 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import "package:http/http.dart" as http;
-
-import "../Widgets/MovieListWidget.dart";
 
 class UpcomingMovieWidget extends StatelessWidget {
   final String movieTitle;
   final String imageUrl;
+  final String description;
 
-  UpcomingMovieWidget({required this.movieTitle, required this.imageUrl});
+  UpcomingMovieWidget(
+      {required this.movieTitle,
+      required this.imageUrl,
+      required this.description});
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +17,9 @@ class UpcomingMovieWidget extends StatelessWidget {
       Container(
           height: 200,
           child: (Column(children: [
-            Text("Jun",
+            const Text("Jun",
                 style: TextStyle(color: Color.fromARGB(167, 255, 255, 255))),
-            Text("02",
+            const Text("02",
                 style: TextStyle(
                     color: Color.fromARGB(255, 255, 255, 255),
                     fontWeight: FontWeight.bold,
@@ -33,7 +32,7 @@ class UpcomingMovieWidget extends StatelessWidget {
             margin: const EdgeInsets.symmetric(horizontal: 6.0),
             width: 300,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(5)),
+              borderRadius: const BorderRadius.all(Radius.circular(5)),
               image: DecorationImage(
                   image: NetworkImage(
                       "https://image.tmdb.org/t/p/w500/" + imageUrl),
@@ -41,18 +40,17 @@ class UpcomingMovieWidget extends StatelessWidget {
             ),
           ),
           Text(movieTitle,
-              style: TextStyle(
+              style: const TextStyle(
                   color: Color.fromARGB(255, 255, 255, 255),
                   fontSize: 20,
                   fontWeight: FontWeight.bold)),
           Container(
               width: 300,
-              child: Text(
-                  "If the style's inherit property is true, the style will be merged with the closest enclosing [DefaultTextStyle]. Otherwise, the style will replace the closest enclosing [DefaultTextStyle].",
+              child: Text(description,
                   style: TextStyle(
                       color: Color.fromARGB(167, 255, 255, 255),
                       fontSize: 12))),
-          Divider(
+          const Divider(
             height: 30,
           )
         ], crossAxisAlignment: CrossAxisAlignment.start),

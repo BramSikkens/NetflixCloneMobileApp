@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import "package:http/http.dart" as http;
 
 import "../Models/Movie.dart";
+import '../Models/UpcomingMovie.dart';
 import "../Widgets/UpcomingMovieWidget.dart";
 
 class UpcomingMovieListWidget extends StatefulWidget {
@@ -16,13 +17,13 @@ class UpcomingMovieListWidget extends StatefulWidget {
 }
 
 class UpcomingMovieListState extends State<UpcomingMovieListWidget> {
-  late Future<List<Movie>> movieList;
+  late Future<List<UpcomingMovie>> movieList;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    movieList = fetchMovies(
+    movieList = fetchUpcomingMovies(
         "https://api.themoviedb.org/3/movie/upcoming?api_key=4582beef3f9c4c12cf6a2cc07d83ce49&language=en-US&page=1");
   }
 
@@ -53,9 +54,9 @@ class UpcomingMovieListState extends State<UpcomingMovieListWidget> {
                     itemCount: snapshot.data.length,
                     itemBuilder: (context, index) {
                       return UpcomingMovieWidget(
-                        movieTitle: snapshot.data[index].name,
-                        imageUrl: snapshot.data[index].backdropPath,
-                      );
+                          movieTitle: snapshot.data[index].name,
+                          imageUrl: snapshot.data[index].backdropPath,
+                          description: snapshot.data[index].description);
                     },
                   );
                 }))
@@ -64,12 +65,13 @@ class UpcomingMovieListState extends State<UpcomingMovieListWidget> {
   }
 }
 
-Future<List<Movie>> fetchMovies(String url) async {
+Future<List<UpcomingMovie>> fetchUpcomingMovies(String url) async {
   final response = await http.get(Uri.parse(url));
 
   if (response.statusCode == 200) {
-    List<Movie> test = List<Movie>.from((json.decode(response.body)["results"])
-        .map((movie) => Movie.fromJson(movie)));
+    List<UpcomingMovie> test = List<UpcomingMovie>.from(
+        (json.decode(response.body)["results"])
+            .map((movie) => UpcomingMovie.fromJson(movie)));
 
     return test;
   } else {

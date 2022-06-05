@@ -1,19 +1,21 @@
-// Settings Tab
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import "package:http/http.dart" as http;
-
+import 'package:provider/provider.dart';
+import '../MovieProvider.dart';
 import "../Widgets/MovieListWidget.dart";
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 // Home Tab
 class HomeTab extends StatelessWidget {
+  final panelController = new PanelController();
+
   @override
   Widget build(BuildContext context) {
+    var myMovie = context.watch<MovieProvider>().myMovie;
+
     return CupertinoPageScaffold(
-        backgroundColor: Color.fromARGB(255, 0, 0, 0),
-        navigationBar: CupertinoNavigationBar(
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+        navigationBar: const CupertinoNavigationBar(
             backgroundColor: Color.fromARGB(0, 0, 0, 0),
             leading: Text(
               "N",
@@ -22,28 +24,18 @@ class HomeTab extends StatelessWidget {
                   fontSize: 30,
                   fontWeight: FontWeight.bold),
             )),
-        child: SafeArea(
-            child: ListView(children: [
-          MovieListWidget(
-              title: "Trending",
-              movieListUrl:
-                  "https://api.themoviedb.org/3/trending/all/week?api_key=4582beef3f9c4c12cf6a2cc07d83ce49"),
-          MovieListWidget(
-              title: "Popular",
-              movieListUrl:
-                  "https://api.themoviedb.org/3/movie/popular?api_key=4582beef3f9c4c12cf6a2cc07d83ce49"),
-          MovieListWidget(
-              title: "title3",
-              movieListUrl:
-                  "https://api.themoviedb.org/3/trending/all/week?api_key=4582beef3f9c4c12cf6a2cc07d83ce49"),
-          MovieListWidget(
-              title: "title4",
-              movieListUrl:
-                  "https://api.themoviedb.org/3/trending/all/week?api_key=4582beef3f9c4c12cf6a2cc07d83ce49"),
-          MovieListWidget(
-              title: "title5",
-              movieListUrl:
-                  "https://api.themoviedb.org/3/trending/all/week?api_key=4582beef3f9c4c12cf6a2cc07d83ce49"),
-        ])));
+        child: SlidingUpPanel(
+            maxHeight: 700,
+            minHeight: 0,
+            defaultPanelState: PanelState.CLOSED,
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+            body: SafeArea(
+                child: ListView(children: [
+              MovieListWidget(
+                  "Trending", context.watch<MovieProvider>().popularMovies,panelController)
+            ])),
+            panel: Center(child: Text(myMovie.name)),
+            controller: panelController));
   }
 }

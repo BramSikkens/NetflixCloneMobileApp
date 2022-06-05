@@ -1,8 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import "../Tabs/HomeTab.dart";
 import 'UpcomingTab.dart';
 
@@ -16,7 +13,7 @@ class TabController extends StatefulWidget {
 }
 
 class TabControllerState extends State<TabController> {
-  List<Widget> _tabs = [
+  final List<Widget> _tabs = [
     HomeTab(), // see the HomeTab class below
     UpcomingTab() // see the SettingsTab class below
   ];
@@ -25,8 +22,8 @@ class TabControllerState extends State<TabController> {
   Widget build(BuildContext context) {
     return CupertinoTabScaffold(
         tabBar: CupertinoTabBar(
-          backgroundColor: Color.fromARGB(255, 0, 0, 0),
-          items: [
+          backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+          items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.movie_creation), label: 'Upcoming')
