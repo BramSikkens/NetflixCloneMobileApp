@@ -5,7 +5,7 @@ import "package:http/http.dart" as http;
 import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import "../Models/Movie.dart";
-import '../MovieProvider.dart';
+import '../utils/MovieProvider.dart';
 
 class MovieListWidget extends StatelessWidget {
   final Future<List<Movie>> movieList;

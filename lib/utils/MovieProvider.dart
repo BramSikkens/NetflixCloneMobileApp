@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import "package:http/http.dart" as http;
-import 'Models/Movie.dart';
+import '../Models/Movie.dart';
 import 'dart:convert';
 
 class MovieProvider with ChangeNotifier {

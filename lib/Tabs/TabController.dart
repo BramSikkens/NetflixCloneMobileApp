@@ -1,18 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import "../Tabs/HomeTab.dart";
+import '../Pages/HomePage.dart';
 import 'UpcomingTab.dart';
 
-class TabController extends StatefulWidget {
-  const TabController({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  TabControllerState createState() {
-    return TabControllerState();
+  HomePageState createState() {
+    return HomePageState();
   }
 }
 
-class TabControllerState extends State<TabController> {
+class HomePageState extends State<HomePage> {
   final List<Widget> _tabs = [
     HomeTab(), // see the HomeTab class below
     UpcomingTab() // see the SettingsTab class below
